@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مدارس البيارق الأهلية - من سيربح المليون (Grade 6 - Dictation 8)</title>
+    <style>
+        :root {
+            --primary-color: #0d5c3a;
+            --primary-dark: #073823;
+            --accent-color: #d4af37;
+            --bg-color: #091224;
+            --card-bg: #1e293b;
+            --text-color: #ffffff;
+            --shadow: 0 10px 30px rgba(0,0,0,0.6);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            direction: rtl;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+            color: var(--text-color);
+            padding: 1.2rem;
+            text-align: center;
+            border-bottom: 5px solid var(--accent-color);
+            box-shadow: var(--shadow);
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            color: var(--accent-color);
+            margin-bottom: 0.3rem;
+        }
+
+        header p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        main {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            flex: 1;
+            width: 100%;
+        }
+
+        .section {
+            display: none;
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            border: 2px solid var(--accent-color);
+            margin-bottom: 2rem;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        h2 {
+            color: var(--accent-color);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #334155;
+            background: #0f172a;
+            color: #fff;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+
+        .btn-start {
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            padding: 14px 25px;
+            border: 2px solid var(--accent-color);
+            border-radius: 8px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            transition: background 0.3s;
+        }
+
+        .btn-start:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .staff-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            background: #0f172a;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid var(--accent-color);
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .staff-item strong {
+            display: block;
+            color: var(--accent-color);
+            font-size: 0.9rem;
+            margin-bottom: 4px;
+        }
+
+        .staff-item span {
+            color: #cbd5e1;
+            font-weight: bold;
+            font-size: 0.95rem;
+        }
+
+        .millionaire-container {
+            text-align: center;
+            position: relative;
+        }
+
+        .audio-prompt-btn {
+            background: var(--accent-color);
+            color: var(--primary-dark);
+            border: none;
+            border-radius: 50%;
+            width: 65px;
+            height: 65px;
+            font-size: 1.8rem;
+            cursor: pointer;
+            margin: 0 auto 1.5rem auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+            transition: transform 0.2s;
+        }
+
+        .audio-prompt-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .lifelines {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .lifeline-btn {
+            background: #0f172a;
+            border: 2px solid var(--accent-color);
+            color: #fff;
+            padding: 10px 18px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+        }
+
+        .lifeline-btn:hover:not(:disabled) {
+            background: var(--accent-color);
+            color: #000;
+        }
+
+        .lifeline-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            border-color: #555;
+        }
+
+        .game-question {
+            background: #0f172a;
+            border: 2px solid var(--accent-color);
+            padding: 20px;
+            border-radius: 12px;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            direction: ltr;
+            font-weight: bold;
+        }
+
+        .game-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            direction: ltr;
+        }
+
+        @media (max-width: 600px) {
+            .game-options { grid-template-columns: 1fr; }
+        }
+
+        .option-btn {
+            background: #0f172a;
+            border: 2px solid #334155;
+            color: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            text-align: left;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .option-btn:hover {
+            border-color: var(--accent-color);
+            background: #1e293b;
+        }
+
+        .audience-chart {
+            display: none;
+            justify-content: space-around;
+            align-items: flex-end;
+            height: 120px;
+            background: #0f172a;
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #334155;
+        }
+
+        .bar-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.85rem;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        .bar {
+            width: 35px;
+            background: var(--accent-color);
+            color: #000;
+            font-weight: bold;
+            border-radius: 4px 4px 0 0;
+            transition: height 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+        }
+
+        /* Certificate Styles */
+        .certificate-box {
+            border: 10px double var(--accent-color);
+            padding: 2.5rem;
+            text-align: center;
+            background: #fffdf5;
+            color: #333;
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .certificate-box h3 {
+            color: var(--primary-color);
+            font-size: 2.2rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .certificate-student {
+            font-size: 1.8rem;
+            color: var(--primary-dark);
+            margin: 1rem 0;
+            font-weight: bold;
+            border-bottom: 2px solid var(--accent-color);
+            display: inline-block;
+            padding: 0 30px;
+        }
+
+        .signatures-grid {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 2.5rem;
+            padding-top: 1rem;
+            border-top: 2px dashed #cbd5e1;
+            direction: ltr;
+        }
+
+        .sig-block strong {
+            display: block;
+            color: var(--primary-color);
+            font-size: 0.95rem;
+        }
+
+        .sig-block span {
+            color: #555;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .btn-print {
+            background-color: var(--accent-color);
+            color: var(--primary-dark);
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin-top: 1.5rem;
+            transition: background 0.3s;
+        }
+
+        .btn-print:hover {
+            background-color: #b89628;
+        }
+
+        @media print {
+            header, .btn-print, .section:not(#certificate-section) {
+                display: none !important;
+            }
+            body { background: white; color: black; }
+            #certificate-section {
+                display: block !important;
+                border: none;
+                box-shadow: none;
+                background: white;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>مدارس البيارق الأهلية</h1>
+        <p>GRADE 6 DICTATION 8 WEEK 8 - مسابقة من سيربح المليون</p>
+    </header>
+
+    <main>
+        <!-- 1. Welcome Section -->
+        <div id="welcome-section" class="section active">
+            <h2>مرحباً بك في تحدي الإملاء التفاعلي!</h2>
+            <p style="margin-bottom: 1.5rem; color: #cbd5e1; text-align: center;">عزيزي الطالب، أدخل اسمك الثلاثي للبدء في مسابقة من سيربح المليون والحصول على شهادة التقدير بنهاية التحدي.</p>
+            
+            <div class="form-group">
+                <label for="studentName">اسم الطالب الثلاثي:</label>
+                <input type="text" id="studentName" placeholder="أدخل اسمك هنا..." autocomplete="off">
+            </div>
+
+            <div class="staff-grid">
+                <div class="staff-item">
+                    <strong>معلم المادة:</strong>
+                    <span>Mr. Mohamed Abdalla Attia</span>
+                </div>
+                <div class="staff-item">
+                    <strong>المشرف التربوي:</strong>
+                    <span>Mr. Mohammed Othman</span>
+                </div>
+                <div class="staff-item">
+                    <strong>قائد المدرسة:</strong>
+                    <span>Mr. Wael Jaafari</span>
+                </div>
+            </div>
+
+            <button class="btn-start" style="margin-top: 20px;" onclick="startQuiz()">ابدأ التحدي الآن 🏆</button>
+        </div>
+
+        <!-- 2. Quiz Section (Millionaire Style) -->
+        <div id="quiz-section" class="section">
+            <h2>مسابقة من سيربح المليون - الإملاء والكلمات</h2>
+            
+            <div class="millionaire-container">
+                <div class="lifelines">
+                    <button class="lifeline-btn" id="btn5050" onclick="use5050()">✂️ حذف إجابتين (50:50)</button>
+                    <button class="lifeline-btn" id="btnPhone" onclick="callFriend()">📞 الاتصال بصديق</button>
+                    <button class="lifeline-btn" id="btnAudience" onclick="askAudience()">👥 رأي الجمهور</button>
+                </div>
+
+                <button class="audio-prompt-btn" onclick="playCurrentWordAudio()" title="استمع للكلمة">🔊</button>
+                <p style="color: var(--accent-color); margin-bottom: 15px; font-size: 0.95rem;">اضغط على مكبر الصوت للاستماع للكلمة، ثم اختر الإملاء الصحيح:</p>
+
+                <div class="game-question" id="gameQuestion">جاري تحميل السؤال...</div>
+
+                <div class="game-options" id="optionsContainer"></div>
+
+                <div class="audience-chart" id="audienceChart">
+                    <div class="bar-wrap"><div class="bar" id="barA">0%</div>A</div>
+                    <div class="bar-wrap"><div class="bar" id="barB">0%</div>B</div>
+                    <div class="bar-wrap"><div class="bar" id="barC">0%</div>C</div>
+                    <div class="bar-wrap"><div class="bar" id="barD">0%</div>D</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Certificate Section -->
+        <div id="certificate-section" class="section">
+            <h2>شهادة التقدير والتميز الإلكترونية</h2>
+            <div class="certificate-box">
+                <p style="font-weight: bold; color: #666; font-size: 1.05rem;">Al-Bayariq Private Schools - Elementary Section</p>
+                <h3>Electronic Certificate of Excellence</h3>
+                <p style="font-size: 1.1rem;">This is to certify that student:</p>
+                <div class="certificate-student" id="certName">اسم الطالب</div>
+                <p style="font-size: 1.1rem;">Grade 6 - Dictation 8 (Week 8)</p>
+                <p style="margin: 1.5rem 0; font-size: 1.1rem; line-height: 1.6;">has successfully completed all spelling challenges in the "Who Wants to Be a Millionaire" quiz with outstanding performance and dedication.</p>
+
+                <div class="signatures-grid">
+                    <div class="sig-block">
+                        <strong>English Teacher</strong>
+                        <span>Mr. Mohamed Abdalla Attia</span>
+                    </div>
+                    <div class="sig-block">
+                        <strong>English Supervisor</strong>
+                        <span>Mr. Mohammed Othman</span>
+                    </div>
+                    <div class="sig-block">
+                        <strong>School Principal</strong>
+                        <span>Mr. Wael Jaafari</span>
+                    </div>
+                </div>
+            </div>
+            <button class="btn-print" onclick="window.print()">🖨️ طباعة الشهادة / حفظ كـ PDF</button>
+        </div>
+    </main>
+
+    <script>
+        const wordsList = [
+            { word: "Starfish", options: ["Starfish", "Starfissh", "Staarfish", "Starfesh"] },
+            { word: "invitation", options: ["invitation", "invitasion", "invitatione", "envitation"] },
+            { word: "Show up", options: ["Show up", "Showop", "Sho up", "Show-up"] },
+            { word: "attend", options: ["attend", "atend", "attende", "attand"] },
+            { word: "On time", options: ["On time", "On tym", "On timee", "Ontime"] },
+            { word: "abroad", options: ["abroad", "abrod", "abroade", "ebroad"] },
+            { word: "explain", options: ["explain", "explen", "explaine", "explane"] },
+            { word: "crosswalk", options: ["crosswalk", "croswalk", "crosswok", "cros-walk"] }
+        ];
+
+        let currentQuestions = [];
+        let currentIndex = 0;
+        let studentName = "";
+
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+        function playSound(type) {
+            try {
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                if (type === 'correct') {
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(587.33, audioCtx.currentTime);
+                    osc.frequency.setValueAtTime(880, audioCtx.currentTime + 0.15);
+                    gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.5);
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 0.5);
+                } else if (type === 'wrong') {
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(150, audioCtx.currentTime);
+                    gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.4);
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 0.4);
+                } else if (type === 'lifeline') {
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(440, audioCtx.currentTime);
+                    gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.3);
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 0.3);
+                }
+            } catch (e) {}
+        }
+
+        function playCurrentWordAudio() {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(currentQuestions[currentIndex].word);
+                utterance.lang = 'en-US';
+                utterance.rate = 0.85;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        function shuffle(array) {
+            let currentIndex = array.length, randomIndex;
+            while (currentIndex != 0) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
+                [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+            }
+            return array;
+        }
+
+        function startQuiz() {
+            const nameInput = document.getElementById('studentName').value.trim();
+            if (!nameInput) {
+                alert('يرجى كتابة اسم الطالب الثلاثي أولاً.');
+                return;
+            }
+
+            studentName = nameInput;
+            document.getElementById('certName').innerText = studentName;
+
+            currentQuestions = shuffle(wordsList.map(q => ({
+                word: q.word,
+                options: shuffle([...new Set(q.options)])
+            })));
+
+            currentIndex = 0;
+
+            document.getElementById('welcome-section').classList.remove('active');
+            document.getElementById('quiz-section').classList.add('active');
+
+            loadQuestion();
+        }
+
+        let correctOptionText = "";
+
+        function loadQuestion() {
+            if (currentIndex >= currentQuestions.length) {
+                finishGame();
+                return;
+            }
+
+            const q = currentQuestions[currentIndex];
+            correctOptionText = q.word;
+
+            document.getElementById('gameQuestion').innerText = `Question ${currentIndex + 1}: Select the correct spelling word.`;
+            document.getElementById('audienceChart').style.display = 'none';
+
+            const optionsContainer = document.getElementById('optionsContainer');
+            optionsContainer.innerHTML = '';
+
+            q.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.innerHTML = `<strong>${String.fromCharCode(65 + idx)}:</strong> <span class="opt-text">${opt}</span>`;
+                btn.onclick = () => checkAnswer(opt);
+                optionsContainer.appendChild(btn);
+            });
+
+            setTimeout(() => { playCurrentWordAudio(); }, 300);
+        }
+
+        function checkAnswer(selectedOpt) {
+            if (selectedOpt === correctOptionText) {
+                playSound('correct');
+                alert('إجابة صحيحة! أحسنت 👏');
+                currentIndex++;
+                loadQuestion();
+            } else {
+                playSound('wrong');
+                alert('إجابة خاطئة! حاول مرة أخرى.');
+            }
+        }
+
+        function use5050() {
+            playSound('lifeline');
+            const buttons = document.querySelectorAll('.option-btn');
+            let removed = 0;
+
+            buttons.forEach((btn) => {
+                const textSpan = btn.querySelector('.opt-text').innerText;
+                if (textSpan !== correctOptionText && removed < 2) {
+                    btn.style.visibility = 'hidden';
+                    removed++;
+                }
+            });
+            document.getElementById('btn5050').disabled = true;
+        }
+
+        function callFriend() {
+            playSound('lifeline');
+            alert(`📞 الصديق يقول: "أنا متأكد بنسبة كبيرة أن الإجابة الصحيحة هي: ${correctOptionText}".`);
+            document.getElementById('btnPhone').disabled = true;
+        }
+
+        function askAudience() {
+            playSound('lifeline');
+            playSound('correct');
+            const chart = document.getElementById('audienceChart');
+            chart.style.display = 'flex';
+            
+            const buttons = document.querySelectorAll('.option-btn');
+            const bars = ['barA', 'barB', 'barC', 'barD'];
+            
+            buttons.forEach((btn, idx) => {
+                const textSpan = btn.querySelector('.opt-text').innerText;
+                const bar = document.getElementById(bars[idx]);
+                let percent = (textSpan === correctOptionText) ? 82 : 6;
+                bar.style.height = `${percent}%`;
+                bar.innerText = `${percent}%`;
+            });
+
+            document.getElementById('btnAudience').disabled = true;
+        }
+
+        function finishGame() {
+            alert(`مبارك يا ${studentName}! لقد أكملت مسابقة من سيربح المليون بنجاح وتم إصدار شهادة التقدير الخاصة بك 🏆`);
+            document.getElementById('quiz-section').classList.remove('active');
+            document.getElementById('certificate-section').classList.add('active');
+        }
+    </script>
+</body>
+</html>
